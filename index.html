@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conciertos 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #ffffff;
+      color: #333;
+    }
+
+    header {
+      background-color: #0070ba;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 20px;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .contenedor {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .eventos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      max-width: 600px;
+      max-height: 420px;
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .card-body {
+      padding: 15px;
+    }
+
+    .card-body h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .card-body p {
+      margin: 5px 0;
+      font-size: 0.95rem;
+    }
+
+    .card-body button, .card-body a {
+      display: block;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #0070ba;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .card-body button:hover, .card-body a:hover {
+      background-color: #005a99;
+    }
+
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+
+    form h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    form label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    form input, form select, form button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    form button {
+      background-color: #0070ba;
+      color: white;
+      border: none;
+      margin-top: 15px;
+    }
+
+    .metodos {
+      margin-top: 40px;
+      background: #f2f7ff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      background-color: #0070ba;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 60px;
+    }
+
+    #infoExtra {
+      background: #f8f9ff;
+      padding: 30px;
+      border-radius: 10px;
+      margin-top: 40px;
+      display: none;
+    }
+
+    #infoExtra h3 {
+      margin-bottom: 15px;
+      color: #0070ba;
+    }
+
+    .info-importante {
+      margin-top: 40px;
+    }
+
+    .info-importante h4 {
+      color: #0070ba;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .info-importante p {
+      text-align: justify;
+      line-height: 1.6;
+    }
+
+    .etapas-venta {
+      margin-top: 40px;
+    }
+
+    .etapas-venta h4 {
+      color: #0070ba;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .etapas-venta p {
+      text-align: justify;
+      line-height: 1.6;
+    }
+      @media (max-width: 768px) {
+      .plano-imagenes img {
+        max-width: 100%;
+      }
+    }
+
+    /* Puedes pegarlo aquí abajo */
+    .plano-imagenes {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    .plano-imagenes img {
+      width: 280px; /* Tamaño reducido */
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    @media (max-width: 768px) {
+      .plano-imagenes img {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TuBoletaDescuentos</h1>
+    <nav>
+      <a href="#eventos">Eventos</a>
+      <a href="#reserva">Reservas</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <div class="contenedor" id="eventos">
+    <h2 style="margin-bottom: 30px; text-align: center;">Próximos Eventos</h2>
+    <div class="eventos">
+      <div class="card">
+        <img src="concierto.jpg" alt="SÚPER CONCIERTO FERIA DE LAS FLORES 2025">
+        <div class="card-body">
+          <h3>SÚPER CONCIERTO FERIA DE LAS FLORES 2025</h3>
+          <p><strong>Fecha:</strong> 9 de agosto</p>
+          <p><strong>Lugar:</strong> Estadio Atanasio Girardot</p>
+          <a href="#" onclick="toggleInfoExtra(event)">Más Información</a>
+          <button onclick="document.getElementById('reserva').scrollIntoView()">Comprar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contenedor" id="infoExtra">
+    <h3>Información del Evento</h3>
+    <p>Este será el evento más esperado de la Feria de las Flores 2025. Con artistas nacionales e internacionales, un montaje de clase mundial y una experiencia inolvidable. No te lo pierdas.</p>
+    <p>🚪 Apertura de puertas: 5:00 PM</p>
+    <p>🕖 Hora del evento: 7:00 PM</p>
+    <p>👤 Edad mínima:<br>Localidad Familiar: 12 Años<br>Demás Localidades: 18 Años</p>
+    <p>🎫 Entradas desde $149.400 COP</p>
+
+    <div class="info-importante">
+      <h4>Información Importante</h4>
+      <p>Las únicas localidades para menores de edad a partir de 12 años son:<br><br>
+      • Gradería Occidental Baja Familiar*<br>
+      • Gradería Oriental Baja Familiar*<br><br>
+      A estas localidades pueden ingresar menores desde 12 años en compañía de un adulto responsable. En estas tribunas no se expenderán ni se podrán consumir bebidas alcohólicas. Todos, tanto menores como acompañante, deben ingresar con boleta de la misma localidad.<br><br>
+      Las demás localidades sin excepción son para Mayores de 18 años. En caso de no cumplir con el requisito mínimo de edad o comprar boletas para un menor de edad en otra localidad diferente a los sectores mencionados*, NO se permitirá el ingreso al Concierto NI se realizará devolución de dinero.</p>
+    </div>
+
+    <div class="etapas-venta">
+      <h4>Etapas De Ventas</h4>
+      <p><strong>Preventa - Público General:</strong> Desde el viernes 13 de Junio a las 10:00 a.m. hasta vender el 50% de aforo de cada localidad o hasta el 2 julio 2025 a las 23:59</p>
+      <p><strong>Precio Full - Público General:</strong> Una vez vendido el 50% de aforo de la localidad hasta agotar existencias o desde el 3 de julio 0:00 horas</p>
+    </div>
+
+    <!-- Sección Plano -->
+      <div class="plano-evento" style="margin-top: 40px;">
+      <h3 style="color: #0070ba; margin-bottom: 15px;">Plano</h3>
+
+       <!-- Imágenes en línea -->
+      <div class="plano-imagenes">
+        <img src="plano-evento.jpg" alt="Plano 1">
+        <img src="plano-evento2.jpg" alt="Plano 2">
+        <img src="evento3.jpg" alt="Plano 3">
+      </div>
+       <!-- Botón Comprar -->
+<button onclick="toggleComprar()" style="background-color:#0070ba; color:white; padding:12px 20px; font-size:16px; border:none; border-radius:5px; cursor:pointer; display:block; margin: 0 auto 30px auto;">
+  Comprar
+</button>
+
+ <!-- Sección Comprar Oculta Inicialmente -->
+ <div id="comprarSeccion" class="comprar-section" style="display: none;">
+  <h3>Selecciona tus entradas</h3>
+  <div class="precios-entradas">
+    <label for="tipoEntrada">Tipo de entrada:</label>
+    <select id="tipoEntrada" onchange="calcularTotal()">
+      <option value="149400">Norte Alta - $149.400</option>
+      <option value="283500">Oriental Alta - $283.500</option>
+      <option value="368100">Occidental Baja - $368.100</option>
+      <option value="466200">Occidental Alta - $466.200</option>
+    </select>
+  </div>
+
+  <div class="cantidad-entradas" style="margin-top: 15px;">
+    <label for="cantidadEntradas">Cantidad:</label>
+    <select id="cantidadEntradas" onchange="calcularTotal()">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+    </select>
+  </div>
+
+  <div id="totalAPagar" style="margin-top: 20px; font-weight: bold; font-size: 16px;">
+    Total: $149.400
+  </div>
+</div>
+
+  <div class="contenedor" id="reserva">
+    <form onsubmit="mostrarMetodosPago(event)">
+      <h2>Formulario de Compra</h2>
+      <label for="nombre">Nombre completo:</label>
+      <input type="text" id="nombre" name="nombre" required>
+      <label for="documento">Número de documento:</label>
+<input type="text" id="documento" name="documento" required>
+      <label for="correo">Correo electrónico:</label>
+      <input type="email" id="correo" name="correo" required>
+
+      <button type="submit">Comprar</button>
+    </form>
+
+    <div id="metodosPago" class="metodos" style="display: none;">
+      <h3>Métodos de Pago</h3>
+     <div style="margin-top: 10px; text-align: center;">
+  <img src="nuevoqr.jpg" alt="Código QR Pago" style="width: 200px; border: 1px solid #ccc; border-radius: 8px;">
+</div>
+      <p>✅Envía el comprobante al WhatsApp <strong>+57 324 620 0874</strong></p>
+    </div>
+  </div>
+
+  <footer id="contacto">
+    <p>Contacto: 📞 +57 324 620 0874</p>
+     <p>         📞 601-593-6301</p>
+    <p>&copy; 2025 TuBoletaDescuentos</p>
+  </footer>
+
+  <script>
+    function mostrarMetodosPago(event) {
+      event.preventDefault();
+      document.getElementById('metodosPago').style.display = 'block';
+    }
+
+    function toggleInfoExtra(event) {
+      event.preventDefault();
+      const info = document.getElementById('infoExtra');
+      if (info.style.display === 'none' || info.style.display === '') {
+        info.style.display = 'block';
+        info.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        info.style.display = 'none';
+      }
+    }
+  </script>
+  <script>
+  function toggleComprar() {
+    const seccion = document.getElementById('comprarSeccion');
+    if (seccion.style.display === 'none' || seccion.style.display === '') {
+      seccion.style.display = 'block';
+      seccion.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      seccion.style.display = 'none';
+    }
+  }
+</script>
+  <script>
+  function calcularTotal() {
+    const precioEntrada = document.getElementById("tipoEntrada");
+    const cantidadEntrada = document.getElementById("cantidadEntradas");
+
+    if (precioEntrada && cantidadEntrada) {
+      const precio = parseInt(precioEntrada.value);
+      const cantidad = parseInt(cantidadEntrada.value);
+      const total = precio * cantidad;
+      document.getElementById("totalAPagar").innerText = "Total: $" + total.toLocaleString('es-CO');
+    }
+  }
+
+  // Asegura que se ejecute cuando todo el DOM esté cargado
+  window.addEventListener('DOMContentLoaded', calcularTotal);
+</script>
+</body>
+</html>
